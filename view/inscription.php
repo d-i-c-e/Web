@@ -5,9 +5,9 @@ $mdp = '';
 
 $bdd = new PDO ($source, $user, $mdp);
 
-$pseudo = $_GET['pseudo'];
-$email = $_GET['emailInscription'];
-$mdp = $_GET['mdpInscription'];
+$pseudo = $_POST['pseudo'];
+$email = $_POST['emailInscription'];
+$mdp = password_hash($_POST['mdpInscription'], PASSWORD_DEFAULT);
 
 $valeurs = ['pseudo'=>$pseudo, 'email'=>$email, 'mdp' =>$mdp];
 

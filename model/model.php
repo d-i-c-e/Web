@@ -25,7 +25,32 @@ function suiteTestCo()
 // si bon redirige
 
 }
+function suiteTestCoAdmin()
+{
+    // Connexion
 
+
+    $source = 'mysql:host=localhost;dbname=dice;charset=utf8';
+    $user = 'root';
+    $mdp = '';
+
+    $bdd = new PDO ($source, $user, $mdp);
+// recup les entrees
+    $identifiant = $_POST['userAdmin'];
+    $mdp = $_POST['mdpAdmin'];
+
+// requete de verif
+    $resultats = $bdd->prepare("select * from admin where identifiant = '" . $identifiant . "' and mdp ='" . $mdp . "'");
+
+    $resultats->execute();
+
+    $st = $resultats->fetch();
+
+    return $st;
+
+// si bon redirige
+
+}
 function deco()
 {
     $source = 'mysql:host=localhost;dbname=dice;charset=utf8';
@@ -35,8 +60,7 @@ function deco()
     $bdd = new PDO ($source, $user, $mdp);
 
 }
-
-function inscription()
+function recupUser()
 {
     $source = 'mysql:host=localhost;dbname=dice;charset=utf8';
     $user = 'root';
@@ -44,9 +68,33 @@ function inscription()
 
     $bdd = new PDO ($source, $user, $mdp);
 
-    $pseudo = $_GET['pseudo'];
-    $email = $_GET['emailInscription'];
-    $mdp = $_GET['mdpInscription'];
+    $pseudo = $_POST['pseudo'];
+    $email = $_POST['emailInscription'];
+    $mdp = password_hash($_POST['mdpInscription'], PASSWORD_DEFAULT);
+
+    $valeurs = ['pseudo'=>$pseudo, 'email'=>$email, 'mdp' =>$mdp];
+
+    $requete = 'SELECT * FROM user where pseudo = '.$_POST['pseudoUser'];
+    
+    $valeurs = [$pseudo=>'pseudo', 'email'=>$email, 'mdp' =>$mdp];
+
+    $requete_preparee = $bdd->prepare($requete);
+    
+    $requete_preparee->execute($valeurs);
+
+
+}
+function AjoutUser()
+{
+    $source = 'mysql:host=localhost;dbname=dice;charset=utf8';
+    $user = 'root';
+    $mdp = '';
+
+    $bdd = new PDO ($source, $user, $mdp);
+
+    $pseudo = $_POST['pseudo'];
+    $email = $_POST['emailInscription'];
+    $mdp = password_hash($_POST['mdpInscription'], PASSWORD_DEFAULT);
 
     $valeurs = ['pseudo'=>$pseudo, 'email'=>$email, 'mdp' =>$mdp];
 
@@ -57,33 +105,18 @@ function inscription()
     
     $requete_preparee->execute($valeurs);
 
-}
 
-function ajouterFiche()
-{
-    $source = 'mysql:host=localhost;dbname=notedefrais;charset=utf8';
-    $user = 'root';
-    $mdp = '';
+    $message='Utilisateur bien ajouté';
+ 
+    echo '<script type="text/javascript">window.alert("'.$message.'");</script>';
 
-    $bdd = new PDO ($source, $user, $mdp);
-
-    //recuperer les variables
-    $identifiant = $bdd->prepare('SELECT id from visiteur where login = (" . $identifiant ."');
-    $id = $identifiant->execute();
-    $id = $id->fetch();
+    header('location:indexAdmin.php?action=11');
     
-    $mois = $_POST['txt_mois'];
-    $forfaitEtape = $_GET['txt_ForfaitEtape'];
-    $fraisKilo = $_GET['txt_FraisKM'];
-    $repasRestaurant = $_GET['txt_restaut'];
-    $nuitHotel = $_GET['txt_Nuit'];
-    $montantValide = $_GET['txt_cout'];
-    $dateModif = date("d-m-y");
-    $idetat = null;
 
-    $resultats = $bdd->prepare("INSERT INTO fichefrais (" . $id. "," . $mois . "," . $forfaitEtape . "," . $fraisKilo . "," . $repasRestaurant . "," . $nuitHotel . "," . $montantValide . "," . $dateModif ."," . $idetat . ")");
-
-    $resultats->execute();
 }
+
+
+
+
 
 ?>

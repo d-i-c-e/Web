@@ -12,7 +12,7 @@ if(empty($_SESSION['emailConnexion']))
 <!doctype html>
 <html>
 <head>
-<title>Télécharger DICE</title>
+<title>Qui sommes-nous ?</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" href="view/images/favicon.png"/>
@@ -24,11 +24,11 @@ if(empty($_SESSION['emailConnexion']))
 
 <body>
 	<div class="container-fluid">
-		<div id="navbar" class="row">
-			<div class="col-1">
-				<img src="view/images/logo_dice.png" alt="DICE"/>
+		<div id="navbar" class="row align-items-center">
+			<div class="col-2">
+				<img src="view/images/logo_dice.png" alt="DICE" style="width: 70%"/>
 			</div>
-			<div class="col-10">
+			<div class="col-9">
 				<ul class="nav nav-tabs">
 				<li class="nav-item">
 					<a class="nav-link " href="index.php?action=1002">Accueil</a>
@@ -40,7 +40,7 @@ if(empty($_SESSION['emailConnexion']))
 					<a class="nav-link" href="index.php?action=1004">Ressources</a>
 			 	</li>
 			  	<li class="nav-item">
-					<a class="nav-link active" href="index.php?action=1005">Téléchargement</a>
+					<a class="nav-link" href="index.php?action=1005">Téléchargement</a>
 			  	</li>
 			</ul>
 			</div>
@@ -48,48 +48,16 @@ if(empty($_SESSION['emailConnexion']))
 				<a href="index.php?action=2001">Deconnexion</a>
 			</div>
 		</div>
-		<div id="configuration">
-			<div class="row justify-content-around">
-				<div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
-					<h1>Configuration recommandé</h1>
-					<p>• Système d'exploitation : W10, Débian, jaguard</p>
-					<p>• Processeur : Intel Core i9 ou AMD Ryzen 5</p>
-					<p>• Carte graphique : Intel Core i9 ou AMD Ryzen 5</p>
-					<p>• Mémoire : 4To</p>
-					<p>• RAM : 32 Go en DDR4</p>
-				</div>
-				<div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
-					<h1>Configuration minimale</h1>
-					<p>• système d'exploitation : W95, vieux linux, vieux MAC</p>
-					<p>• Processeur : Intel Pentium</p>
-					<p>• Carte Graphique : Intel Core i9 ou AMD Ryzen 5</p>
-					<p>• Mémoire : Intel Core i9 ou AMD Ryzen 5</p>
-					<p>• RAM : Intel Core i9 ou AMD Ryzen 5</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-					<p>Et sinon, n'importe quel pc fera l'affaire. Pensez juste à vos micros et votre bonne humeur ! ;)</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-					<h2>Compatible sur : </h2>
-					<img src="view/images/windows.png" alt="Windows"/><img src="view/images/apple.png" alt="apple"/><img src="view/images/linux.png" alt="linux"/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-					<a href="#" class="btn btn-primary btn-raised btn-lg">Télécharger Dice</a>
-				</div>
-			</div>
+		<div id="tutoriel">
+			
+			
 		</div>
 		<div id="footer" class="row justify-content-around">
 			<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
 				<h3>Dice</h3>
 				<p>Dice est un logiciel développé par des amateurs de jeu de rôle, pour les amateurs de jeu de rôle. Il permet de jouer à distance, sans avoir à être dans la même pièce.</p>
 			</div>
-			<div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
+			<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
 				<h3>Nous retrouver</h3>
 				<a href="#" target="_blank"><img src="view/images/facebook.png" alt="facebook"/></a><a href="#" target="_blank"><img src="view/images/twitter.png" alt="twitter"/></a><a href="#" target="_blank"><img src="view/images/instagram.png" alt="instagram"/></a>
 			</div>
@@ -113,6 +81,7 @@ if(empty($_SESSION['emailConnexion']))
 					
 				</div>
 			</div>
+
 		</div>
 	</div>
 </body>

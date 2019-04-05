@@ -43,7 +43,7 @@ $requete_preparee->execute($valeurs);
         </div>
         <div id="main" class="row justify-content-around">
         <h1>Tu as bien été inscrit !</h1>
-            <form method="post" action="../index.php">
+            <form method="post" action="../index.php?action=1">
                 <button type="submit" class="btn btn-primary btn-raised">Retour connexion</button>
             </form>
         </div>

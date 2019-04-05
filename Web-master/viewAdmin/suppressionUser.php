@@ -1,28 +1,15 @@
 <?php
 session_start();  // démarrage d'une session
 
-// on vérifie que les données du formulaire sont présentes
-if (isset($_POST['userAdmin']) && isset($_POST['mdpAdmin'])) {
-    require 'config.php';
-    $bdd = getBdd();
-    // cette requête permet de récupérer l'utilisateur depuis la BD
-    $login = $_POST['userAdmin'];
-    $mdp = $_POST['mdpAdmin'];
-    $resultat = $bdd->prepare("SELECT * FROM admin WHERE identifiant=? AND mdp=?");
-    $resultat->execute(array($login, $mdp));
-    if ($resultat->rowCount() == 1) {
-        // l'utilisateur existe dans la table
-        // on ajoute ses infos en tant que variables de session
-        $_SESSION['userAdmin'] = $login;
-        $_SESSION['mdpAdmin'] = $mdp;
-        // cette variable indique que l'authentification a réussi
-        $authOK = true;
-    }
+// on vérifie que les variables de session identifiant l'utilisateur existent
+if (isset($_SESSION['userAdmin']) && isset($_SESSION['mdpAdmin'])) {
+    $login = $_SESSION['userAdmin'];
+    $mdp = $_SESSION['mdpAdmin'];
 }
 ?>
 <!doctype html>
 <html>
-<head> 
+<head>
 <title>Admin : Utilisateur</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,7 +20,7 @@ if (isset($_POST['userAdmin']) && isset($_POST['mdpAdmin'])) {
 	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
 </head>
 
-<body>
+<body> 
 	<div class="container-fluid">
 		<div id="navbar" class="row">
 			<div class="col-1">
@@ -42,15 +29,15 @@ if (isset($_POST['userAdmin']) && isset($_POST['mdpAdmin'])) {
 			<div class="col-10">
 				<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" href="indexAdmin.php?action=3002">Ajout</a>
+					<a class="nav-link" href="indexAdmin.php?action=3002">Ajout</a>
 			  	</li>
 			  	<li class="nav-item">
 					<a class="nav-link" href="indexAdmin.php?action=3003">Modification</a>
 			  	</li>
 			  	<li class="nav-item">
-					<a class="nav-link" href="indexAdmin.php?action=3004">Suppresion</a>
+					<a class="nav-link active" href="indexAdmin.php?action=3004">Suppresion</a>
 				 </li>
-				<li class="nav-item">
+				 <li class="nav-item">
 				<?php
     			if (isset($authOK)) {
         			echo "<p>Vous avez été reconnu(e) en tant que " . escape($login) . "</p>";
@@ -62,34 +49,66 @@ if (isset($_POST['userAdmin']) && isset($_POST['mdpAdmin'])) {
 				</li>
 			</ul>
 			</div>
-			
 			<div class="col-1">
 				<a href="indexAdmin.php">Deconnexion</a>
 			</div>
 		</div>
 		<div id="main" class="row justify-content-around">
 			<div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
-				<h1>Ajout d'un utilisateur</h1>
-				<form method="post" action="indexAdmin.php?action=3005">
+				<h1>Suppresion d'un utilisateur</h1>
+				<form method="post" action="indexAdmin.php?action=3007">
+					<div class="form-group">
+						<select name="pseudoUser" onchange="remplir(this.value);">
+						<?php
+						 $source = 'mysql:host=localhost;dbname=dice;charset=utf8';
+						 $user = 'root';
+						 $mdp = '';
+					 
+						 $bdd = new PDO ($source, $user, $mdp);
+						
+					 
+					 // requete de verif
+						 $resultats = $bdd->prepare("select pseudo, email, mdp from user");
+						 $resultats->execute();
+					 	 echo( '<option value="0" selected="selected">Selectionner un utilisateur</option>');
+						 while ($st = $resultats->fetch())
+						 {
+							 $pseudo = $st['pseudo'];
+							 $email = $st['email'];
+							 $mdp = $st['mdp']
+						?>
+						<?php
+						
+						 echo( '<option value="'.$pseudo.'/'.$email.'/'.$mdp.'">' .$pseudo. '</option>');
+						 }
+						 ?>
+						</select>
+					</div>
 					<div class="form-group">
 						<label for="pseudo" class="bmd-label-floating">Pseudo</label>
-						<input type="text" class="form-control" name="pseudo" id="pseudo" required="required">
+						<input type="text" class="form-control" name="pseudoModif" id="pseudo" value="" required="required">
 						
 					</div>
 					<div class="form-group">
 						<label for="emailInscription" class="bmd-label-floating">Adresse email</label>
-						<input type="email" class="form-control" name="emailInscription" id="emailInscription" required="required">
+						<input type="email" class="form-control" name="emailModif" id="emailInscription" value="" required="required">
 						
 					</div>
 					<div class="form-group">
 						<label for="mdpInscription" class="bmd-label-floating">Mot de passe</label>
-						<input type="password" class="form-control" name="mdpInscription" id="mdpInscription" required="required">
+						<input type="password" class="form-control" name="mdpModif" id="mdpInscription" value="" required="required">
+						
 					</div>
-					<div class="form-group">
-						<label for="mdpVerification" class="bmd-label-floating">Confirmation du mot de passe</label>
-						<input type="password" class="form-control" name="mdpVerification" id="mdpVerification" required="required">
-					</div>
-					<button type="submit" class="btn btn-primary btn-raised">Ajouter</button>
+					<script type="text/javascript">
+					function remplir(monuser){
+						var tableau_valeur = monuser.split('/');
+						document.getElementById("pseudo").value = tableau_valeur[0];
+						document.getElementById("emailInscription").value = tableau_valeur[1];
+						document.getElementById("mdpInscription").value = tableau_valeur[2];
+					}
+					</script>
+					<button type="submit" class="btn btn-primary btn-raised">Supprimer</button>
+					
 				</form>
 			</div>
 		</div>

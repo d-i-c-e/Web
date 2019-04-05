@@ -9,7 +9,41 @@
 	<link rel="stylesheet" type="text/css" href="view/css/dice.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
 	<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-	
+	<script type="text/javascript">
+		function checkPass()
+		{
+			var mdpInscription = document.getElementById("mdpInscription").value;
+			var mdpVerification = document.getElementById("mdpVerification").value;
+			var emailInscription = document.getElementById("emailInscription").value;
+			var emailVerification = document.getElementById("emailVerification").value;
+			var comp_email = document.getElementById("compEmail");
+			var comp_mdp = document.getElementById("compeMdp");
+			
+			if(mdpInscription == mdpVerification)
+			{
+				compeMdp.innerHTML = "Correct";
+			}
+			else
+			{
+				compeMdp.innerHTML = "Mauvais mot de passe";
+			}
+		}
+		function checkEmail()
+		{
+			var emailInscription = document.getElementById("emailInscription").value;
+			var emailVerification = document.getElementById("emailVerification").value;
+			var compEmail = document.getElementById("compEmail");
+			
+			if(emailInscription == emailVerification)
+			{
+				compEmail.innerHTML = "Correct";
+			}
+			else
+			{
+				compEmail.innerHTML = "Email pas similaire";
+			}
+		}
+	</script>
 	
 </head>
 
@@ -17,7 +51,7 @@
 	<div class="container-fluid">
 		<div id="header" class="row">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-				<a href="index.php?action=1"><img src="view/images/sorciere_v2.png" alt="" class="imgheader"/></a>
+				<a href="index.php?action=1002"><img src="view/images/sorciere_v2.png" alt="" class="imgheader"/></a>
 			</div>
 		</div>
 		<div id="main" class="row justify-content-around">
@@ -36,8 +70,8 @@
 					</div>
 					<div class="form-group">
 						<label for="emailVerification" class="bmd-label-floating">Confirmation d'adresse email</label>
-						<input type="email" class="form-control" name="emailVerification" id="emailVerification" required="required">
-						
+						<input type="email" class="form-control" name="emailVerification" id="emailVerification" onBlur="checkEmail()" required="required">
+						<div id="compeEmail"></div>
 					</div>
 					<div class="form-group">
 						<label for="mdpInscription" class="bmd-label-floating">Mot de passe</label>
@@ -45,7 +79,8 @@
 					</div>
 					<div class="form-group">
 						<label for="mdpVerification" class="bmd-label-floating">Confirmation du mot de passe</label>
-						<input type="password" class="form-control" name="mdpVerification" id="mdpVerification" required="required">
+						<input type="password" class="form-control" name="mdpVerification" id="mdpVerification" onBlur="checkPass()" required="required">
+						<div id="compeMdp"></div>
 					</div>
 					<button type="submit" class="btn btn-primary btn-raised">Inscription</button>
 				</form>
@@ -73,7 +108,7 @@
 				<h3>Dice</h3>
 				<p>Dice est un logiciel développé par des amateurs de jeu de rôle, pour les amateurs de jeu de rôle. Il permet de jouer à distance, sans avoir à être dans la même pièce.</p>
 			</div>
-			<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+			<div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
 				<h3>Nous retrouver</h3>
 				<a href="#" target="_blank"><img src="view/images/facebook.png" alt="facebook"/></a><a href="#" target="_blank"><img src="view/images/twitter.png" alt="twitter"/></a><a href="#" target="_blank"><img src="view/images/instagram.png" alt="instagram"/></a>
 			</div>

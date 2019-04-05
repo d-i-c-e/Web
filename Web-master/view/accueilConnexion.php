@@ -1,7 +1,18 @@
+<?php
+// On prolonge la session
+/*session_start();
+// On teste si la variable de session existe et contient une valeur
+if(empty($_SESSION['emailConnexion'])) 
+{
+  // Si inexistante ou nulle, on redirige vers le formulaire de login
+  header('Location: index.php?action=1');
+  exit();
+}*/
+?>
 <!doctype html>
 <html>
 <head>
-	<title>Accueil DICE</title>
+	<title>Bienvenue sur DICE</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" href="view/images/favicon.png"/>
@@ -13,9 +24,28 @@
 
 <body>
 	<div class="container-fluid">
-		<div id="header" class="row">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-				<img src="view/images/logo_dice.png" alt="" style="margin: 5% 0"/>
+		<div id="navbar" class="row align-items-center">
+			<div class="col-2">
+				<img src="view/images/logo_dice.png" alt="DICE" style="width: 70%"/>
+			</div>
+			<div class="col-9">
+				<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link active"  href="index.php?action=1002">Accueil</a>
+			  	</li>
+			  	<li class="nav-item">
+					<a class="nav-link" href="index.php?action=1003">Tutoriels</a>
+			  	</li>
+			  	<li class="nav-item">
+					<a class="nav-link" href="index.php?action=1004">Ressources</a>
+			 	</li>
+			  	<li class="nav-item">
+					<a class="nav-link" href="index.php?action=1005">Téléchargement</a>
+			  	</li>
+			</ul>
+			</div>
+			<div class="col-1">
+				<a href="index.php?action=2001">Deconnexion</a>
 			</div>
 		</div>
 		<div id="caroussel" class="row">
@@ -70,60 +100,38 @@
 				<img src="view/images/sorciere_complete.png" alt="" style="width: 100%"/>
 			</div>
 		</div>
-		<div id="description" class="row">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<h2>En clair Dice c'est :</h2>
-				<div class="row justify-content-center">
-					<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
-						<img src="view/images/visuellogicielressources.png" alt="visuel des ressources" class="mx-auto d-block"/>
-					</div>
-					<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 align-self-center">
-						<h3>Des ressources</h3>
-						<p>Avec Dice vous aurez  la posibilité de visualiser, importer, télécharger toutes les ressources nécessaires pour créer la partie de vos rêves. Ami MJ, fais-toi plaisir.</p>
-					</div>
-				</div>
-				<div class="row justify-content-center">
-					
-					<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
-						<img src="view/images/visuellogicielpartie.png" alt="visuel des ressources" class="mx-auto d-block"/>
-						
-					</div>
-					<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 align-self-center">
-						<h3>Des parties</h3>
-						<p>Dice c'est aussi une façon visuel d'accéder à toutes ses parties ou d'en créer de nouvelles. Dice sauvegarde toutes les actions que vous faites comme la création de vos personnages, vos cartes ou vos groupes. Pour le MJ les choses sont assez simples. Et une fois la partie lancée, les joueurs recevront une alerte pour rejoindre la partie avec le personnage de leurs choix.</p>
-					</div>
-				</div>
-				<div class="row justify-content-center">
-					<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
-						<img src="view/images/visuellogicielparametres.png" alt="visuel des ressources" class="mx-auto d-block"/>
-					</div>
-					<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 align-self-center">
-						<h3>Lorem ipsum</h3>
-						<p>Lorem ipsum</p>
-					</div>
-				</div>
-				
-			</div>
 		
-		</div>
-		<div id="download" class="row">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<h2>Rejoins la communauté</h2>
-				<p>En rejoignant la communauté, tu partiras à la découverte d'un monde enchanté. D'un monde qui te fera voyager jusqu'au confin de l'univers. D'un monde duquel tu ne voudras plus jamais revenir. Et tu sauveras les rollistes.</p>
-				<p>Et plus sérieusement, tu auras accès à toutes les ressources mises à la disposition des joueurs et MJ. Alors n'ai pas peur, et lance toi dans l'aventure.</p>
-				<a class="btn btn-info btn-raised" href="index.php?action=1">Inscription/connexion</a>
-			</div>
-		</div>
+		
 		<div id="footer" class="row justify-content-around">
-			<div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2">
+			<div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
 				<h3>Dice</h3>
 				<p>Dice est un logiciel développé par des amateurs de jeu de rôle, pour les amateurs de jeu de rôle. Il permet de jouer à distance, sans avoir à être dans la même pièce.</p>
 			</div>
-			<div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+			<div class="col-sm-12 col-md-12 col-lg-2 col-xl-2">
 				<h3>Nous retrouver</h3>
 				<a href="#" target="_blank"><img src="view/images/facebook.png" alt="facebook"/></a><a href="#" target="_blank"><img src="view/images/twitter.png" alt="twitter"/></a><a href="#" target="_blank"><img src="view/images/instagram.png" alt="instagram"/></a>
 			</div>
-
+			<div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+				<h3>Liens utiles</h3>
+				<div class="row">
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+						<ul>
+							<li><a href="index.php?action=1005">Télécharger le logiciel</a></li>
+							<li><a href="index.php?action=1003">Tutoriels</a></li>
+							<li><a href="index.php?action=1004">Ressources</a></li>
+						</ul>
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+						<ul>
+							<li><a href="index.php?action=1007">Qui sommes-nous ?</a></li>
+							<li><a href="index.php?action=1006">Mentions légales</a></li>
+							<li><a href="index.php?action=1008">Plan du site</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				
+			</div>
 		</div>
 	</div>
 	
